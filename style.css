@@ -1,0 +1,29 @@
+.container{
+    margin-top: 20px;
+}
+.navbar{
+   justify-content: center; 
+}
+    
+.example{
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+}
+input{
+    width: 400px;
+    padding: 10px;
+    font-size: 17px;
+}
+button{
+    width: 60px;
+  padding: 10px;
+  color: white;
+  font-size: 17px;
+  background: #2196F3;
+  border: 1px solid grey;
+}
+button:hover {
+    background: #0b7dda;
+  }
+
