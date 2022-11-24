@@ -2,7 +2,7 @@ let container=document.createElement("div");
  container.setAttribute("class","container");
 
 let navbar=document.createElement("nav");
-navbar.setAttribute("class","navbar navbar-dark bg-primary");
+navbar.setAttribute("class","navbar navbar-dark bg-info");
 
 let head=document.createElement("h1");
 head.innerHTML="DICTINORY";
@@ -23,16 +23,18 @@ let itag=document.createElement("i");
 itag.setAttribute("class","fa fa-search");
 buttontag.append(itag);
 
+let ptag=document.createElement("p");
+ptag.setAttribute("class","message");
+ptag.innerHTML="Once search please Refresh the page because using promise";
+
 let division1=document.createElement("div");
 division1.setAttribute("class","result");
-
-//let ptag=document.createElement("p");
 
 navbar.append(head);
 container.append(navbar);
 division.append(inputTag,buttontag);
 container.append(division);
-// division1.append(ptag);
+container.append(ptag);
 container.append(division1);
 document.body.append(container);
 
@@ -40,6 +42,7 @@ document.body.append(container);
 let dictinory=new Promise((resolve, reject) => {
     let dictinoryinput=document.getElementById("sear");
     dictinoryinput.addEventListener('click',()=>{
+        console.log(dictinoryinput);
          console.log(txt.value);
     let request=new XMLHttpRequest();
     request.open(`GET`,`https://api.dictionaryapi.dev/api/v2/entries/en/${txt.value}`);
@@ -54,9 +57,11 @@ let dictinory=new Promise((resolve, reject) => {
     }
  })
 })
-dictinory.then((res)=>{console.log(res[0].meanings)
-    res[0].meanings.map((ele)=>{
-   division1.innerHTML=`<p><b>Definition : ${ele[0].definitions[0].definition}</b></p>
-                   <p><b>Synonymus : ${ele[0].synonymus[0]}</b></p>`
+dictinory.then((res)=>{console.log(res)
+    console.log(res[0].meanings[0].definitions[0].definition);
+    console.log(res[0].meanings[0].synonyms[0]);
+    division1.innerHTML=`<p><b>Definition : ${res[0].meanings[0].definitions[0].definition}</b></p><br>
+                         <p><b>Synonymus : ${res[0].meanings[0].synonyms[0]}</b></p>`
+}).catch((err)=>{console.log(err)
+    division1.innerHTML=`<p><b>This is Error : Enter the correct word</b></p>`
 })
-}).catch((rej)=>{console.log(rej)});
