@@ -23,11 +23,18 @@ let itag=document.createElement("i");
 itag.setAttribute("class","fa fa-search");
 buttontag.append(itag);
 
+let division1=document.createElement("div");
+division1.setAttribute("class","result");
+
+//let ptag=document.createElement("p");
+
 navbar.append(head);
 container.append(navbar);
-document.body.append(container);
 division.append(inputTag,buttontag);
 container.append(division);
+// division1.append(ptag);
+container.append(division1);
+document.body.append(container);
 
 
 let dictinory=new Promise((resolve, reject) => {
@@ -47,4 +54,9 @@ let dictinory=new Promise((resolve, reject) => {
     }
  })
 })
-dictinory.then((res)=>{console.log(res)}).catch((rej)=>{console.log(rej)});
+dictinory.then((res)=>{console.log(res[0].meanings)
+    res[0].meanings.map((ele)=>{
+   division1.innerHTML=`<p><b>Definition : ${ele[0].definitions[0].definition}</b></p>
+                   <p><b>Synonymus : ${ele[0].synonymus[0]}</b></p>`
+})
+}).catch((rej)=>{console.log(rej)});
