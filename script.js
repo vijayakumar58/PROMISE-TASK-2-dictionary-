@@ -16,8 +16,8 @@ inputTag.setAttribute("placeholder","Search");
 inputTag.setAttribute("id","txt");
 
 let buttontag=document.createElement("button");
-buttontag.setAttribute("type","submit");
-buttontag.setAttribute("click","dictinory(resolve, reject)")
+buttontag.setAttribute("type","search");
+buttontag.setAttribute("id","sear");
 
 let itag=document.createElement("i");
 itag.setAttribute("class","fa fa-search");
@@ -31,18 +31,20 @@ container.append(division);
 
 
 let dictinory=new Promise((resolve, reject) => {
-    let dictinoryinput=document.getElementById("txt").value;
-    // console.log(dictinoryinput);
+    let dictinoryinput=document.getElementById("sear");
+    dictinoryinput.addEventListener('click',()=>{
+         console.log(txt.value);
     let request=new XMLHttpRequest();
-    request.open(`GET`,`https://api.dictionaryapi.dev/api/v2/entries/en/${dictinoryinput}`);
+    request.open(`GET`,`https://api.dictionaryapi.dev/api/v2/entries/en/${txt.value}`);
     request.send();
     request.onload=function(){
-        if(request.status=200){
+        if(request.status==200){
             let data=JSON.parse(request.response);
             resolve(data);
         }else{
             reject("Enter the correct word");
         }
     }
+ })
 })
 dictinory.then((res)=>{console.log(res)}).catch((rej)=>{console.log(rej)});
